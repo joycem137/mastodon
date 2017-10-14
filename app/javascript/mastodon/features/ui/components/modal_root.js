@@ -42,6 +42,10 @@ export default class ModalRoot extends React.PureComponent {
     onClose: PropTypes.func.isRequired,
   };
 
+  state = {
+    revealed: false,
+  };
+
   getSnapshotBeforeUpdate () {
     return { visible: !!this.props.type };
   }
