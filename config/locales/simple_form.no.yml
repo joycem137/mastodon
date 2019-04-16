@@ -38,7 +38,7 @@
         setting_delete_modal: Vis bekreftelse før du sletter en tut
         setting_noindex: Ikke delta i søkemotorsindeksering
         setting_reduce_motion: Reduser bevegelser i animasjoner
-        setting_system_font_ui: Bruk systemets standardfont
+        setting_system_font_ui: Bruk nettleserens standardfont
         setting_theme: Sidens tema
         setting_unfollow_modal: Vis bekreftelse før du slutter å følge noen
         severity: Alvorlighetsgrad
