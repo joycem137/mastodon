@@ -37,7 +37,7 @@ export default class UploadButton extends ImmutablePureComponent {
 
     return (
       <div className='compose-form__upload-button'>
-        <IconButton icon='pencil' title={intl.formatMessage(messages.doodle)} disabled={disabled} onClick={this.handleClick} className='compose-form__upload-button-icon' size={18} inverted style={iconStyle} />
+        <IconButton icon='paint-brush' title={intl.formatMessage(messages.doodle)} disabled={disabled} onClick={this.handleClick} className='compose-form__upload-button-icon' size={18} inverted style={iconStyle} />
       </div>
     );
   }
