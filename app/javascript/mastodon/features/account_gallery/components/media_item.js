@@ -88,8 +88,10 @@ export default class MediaItem extends ImmutablePureComponent {
     const width  = `${Math.floor((displayWidth - 4) / 3) - 4}px`;
     const height = width;
     const status = attachment.get('status');
+    const title = status.get('spoiler_text') || attachment.get('description');
 
     let thumbnail = '';
+    let icon;
 
     if (attachment.get('type') === 'unknown') {
       // Skip
@@ -131,11 +133,16 @@ export default class MediaItem extends ImmutablePureComponent {
       );
     }
 
+    if (!visible) {
+      );
+    }
+
     return (
       <div className='account-gallery__item' style={{ width, height }}>
-        <a className='media-gallery__item-thumbnail' href={status.get('url')} target='_blank' onClick={this.handleClick}>
+        <a className='media-gallery__item-thumbnail' href={status.get('url')} target='_blank' onClick={this.handleClick} title={title}>
           <canvas width={32} height={32} ref={this.setCanvasRef} className={classNames('media-gallery__preview', { 'media-gallery__preview--hidden': visible && loaded })} />
           {visible && thumbnail}
+          {!visible && icon}
         </a>
       </div>
     );
