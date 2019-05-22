@@ -29,7 +29,7 @@ module Mastodon
     end
 
     def suffix
-      '+beachcity1.5.0'
+      '+beachcity1.5.1'
     end
 
     def to_s
