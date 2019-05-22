@@ -18,6 +18,7 @@ export default class UploadButton extends ImmutablePureComponent {
 
   static propTypes = {
     disabled: PropTypes.bool,
+    unavailable: PropTypes.bool,
     onOpenCanvas: PropTypes.func.isRequired,
     style: PropTypes.object,
     intl: PropTypes.object.isRequired,
@@ -28,8 +29,11 @@ export default class UploadButton extends ImmutablePureComponent {
   }
 
   render () {
+    const { intl, disabled, unavailable } = this.props;
 
-    const { intl, disabled } = this.props;
+    if (unavailable) {
+      return null;
+    }
 
     return (
       <div className='compose-form__upload-button'>
