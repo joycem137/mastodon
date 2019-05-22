@@ -133,10 +133,6 @@ export default class MediaItem extends ImmutablePureComponent {
       );
     }
 
-    if (!visible) {
-      );
-    }
-
     return (
       <div className='account-gallery__item' style={{ width, height }}>
         <a className='media-gallery__item-thumbnail' href={status.get('url')} target='_blank' onClick={this.handleClick} title={title}>
