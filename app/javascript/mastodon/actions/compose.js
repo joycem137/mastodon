@@ -63,6 +63,7 @@ const messages = defineMessages({
   uploadErrorLimit: { id: 'upload_error.limit', defaultMessage: 'File upload limit exceeded.' },
   uploadErrorPoll:  { id: 'upload_error.poll', defaultMessage: 'File upload not allowed with polls.' },
 });
+export const COMPOSE_DOODLE_SET        = 'COMPOSE_DOODLE_SET';
 
 export function changeCompose(text) {
   return {
@@ -198,6 +199,13 @@ export function submitComposeFail(error) {
   return {
     type: COMPOSE_SUBMIT_FAIL,
     error: error,
+  };
+};
+
+export function doodleSet(options) {
+  return {
+    type: COMPOSE_DOODLE_SET,
+    options: options,
   };
 };
 
