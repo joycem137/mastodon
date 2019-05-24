@@ -34,6 +34,7 @@ class UserSettingsDecorator
     user.settings['hide_network']        = hide_network_preference if change?('setting_hide_network')
     user.settings['aggregate_reblogs']   = aggregate_reblogs_preference if change?('setting_aggregate_reblogs')
     user.settings['show_application']    = show_application_preference if change?('setting_show_application')
+    user.settings['enable_doodle']       = enable_doodle_preference if change?('setting_enable_doodle')
   end
 
   def merged_notification_emails
@@ -98,6 +99,10 @@ class UserSettingsDecorator
 
   def show_application_preference
     boolean_cast_setting 'setting_show_application'
+  end
+  
+  def enable_doodle_preference
+    boolean_cast_setting 'setting_enable_doodle'
   end
 
   def theme_preference
