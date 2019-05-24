@@ -8,6 +8,7 @@ All changes to Beach City beyond the vanilla Beach City code will be documented 
 ## Changed
 - Changed Drawing tool icon to a paint brush
 - Upgraded Doodle pad code to latest Glitch-soc code
+- Added an opt-in setting for the doodle pad, under a new "mods" settings section
 
 =======
 ## [1.5.0] - 2019-05-22
