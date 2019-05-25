@@ -3,6 +3,7 @@ const initialState = element && JSON.parse(element.textContent);
 
 const getMeta = (prop) => initialState && initialState.meta && initialState.meta[prop];
 
+export const enableLocalOnly = getMeta('enable_local_only');
 export const enableDoodle = getMeta('enable_doodle');
 export const reduceMotion = getMeta('reduce_motion');
 export const autoPlayGif = getMeta('auto_play_gif');
