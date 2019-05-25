@@ -28,8 +28,6 @@
 
     = f.input :setting_default_sensitive, as: :boolean, wrapper: :with_label
 
-    = f.input :setting_default_federation, as: :boolean, wrapper: :with_label
-
   %hr#settings_other/
 
   .fields-group
@@ -66,10 +64,13 @@
   %hr#settings_mods/
   
   .fields-group
+    = f.input :setting_default_federation, as: :boolean, wrapper: :with_label
+  
+  .fields-group
     = f.input :setting_enable_doodle, as: :boolean, wrapper: :with_label
     
   .fields-group
-    = f.input :setting_enable_local_only, as: :boolean, wrapper: :with_label
+    = f.input :setting_enable_federation_dropdown, as: :boolean, wrapper: :with_label
 
   .actions
     = f.button :button, t('generic.save_changes'), type: :submit
