@@ -7,6 +7,7 @@ All changes to Beach City beyond the vanilla Beach City code will be documented 
 ## Added
 - Simplified versions of existing themes with a single column.
 - Added an opt-in setting for the doodle pad, under a new "mods" settings section
+- Added an opt-in setting for the local only posts option, enabled by default for all users.
 
 ## Changed
 - Changed Drawing tool icon to a paint brush

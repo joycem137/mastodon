@@ -32,6 +32,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:expand_spoilers] = object.current_account.user.setting_expand_spoilers
       store[:reduce_motion]   = object.current_account.user.setting_reduce_motion
       store[:enable_doodle]   = object.current_account.user.setting_enable_doodle
+      store[:enable_local_only] = object.current_account.user.setting_enable_local_only
       store[:is_staff]        = object.current_account.user.staff?
     end
 

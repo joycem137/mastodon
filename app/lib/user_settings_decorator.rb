@@ -35,6 +35,7 @@ class UserSettingsDecorator
     user.settings['aggregate_reblogs']   = aggregate_reblogs_preference if change?('setting_aggregate_reblogs')
     user.settings['show_application']    = show_application_preference if change?('setting_show_application')
     user.settings['enable_doodle']       = enable_doodle_preference if change?('setting_enable_doodle')
+    user.settings['enable_local_only']   = enable_local_only_preference if change?('setting_enable_local_only')
   end
 
   def merged_notification_emails
@@ -103,6 +104,10 @@ class UserSettingsDecorator
   
   def enable_doodle_preference
     boolean_cast_setting 'setting_enable_doodle'
+  end
+  
+  def enable_local_only_preference
+    boolean_cast_setting 'setting_enable_local_only'
   end
 
   def theme_preference
