@@ -51,7 +51,7 @@ class Settings::PreferencesController < Settings::BaseController
       :setting_aggregate_reblogs,
       :setting_show_application,
       :setting_enable_doodle,
-      :setting_enable_local_only,
+      :setting_enable_federation_dropdown,
       notification_emails: %i(follow follow_request reblog favourite mention digest report pending_account),
       interactions: %i(must_be_follower must_be_following)
     )
