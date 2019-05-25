@@ -13,7 +13,7 @@ module Mastodon
     end
 
     def patch
-      3
+      4
     end
 
     def pre
@@ -29,7 +29,7 @@ module Mastodon
     end
 
     def suffix
-      '+beachcity1.5.0'
+      '+beachcity1.6.0'
     end
 
     def to_s

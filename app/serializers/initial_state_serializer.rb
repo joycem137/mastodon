@@ -31,6 +31,8 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:display_media]   = object.current_account.user.setting_display_media
       store[:expand_spoilers] = object.current_account.user.setting_expand_spoilers
       store[:reduce_motion]   = object.current_account.user.setting_reduce_motion
+      store[:enable_doodle]   = object.current_account.user.setting_enable_doodle
+      store[:enable_federation_dropdown] = object.current_account.user.setting_enable_federation_dropdown
       store[:is_staff]        = object.current_account.user.staff?
     end
 

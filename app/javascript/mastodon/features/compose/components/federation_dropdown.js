@@ -152,6 +152,7 @@ export default class FederationDropdown extends React.PureComponent {
     isModalOpen: PropTypes.bool.isRequired,
     onModalOpen: PropTypes.func,
     onModalClose: PropTypes.func,
+    unavailable: PropTypes.bool,
     value: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
@@ -214,7 +215,12 @@ export default class FederationDropdown extends React.PureComponent {
   }
 
   render () {
-    const { value, intl } = this.props;
+    const { value, intl, unavailable } = this.props;
+    
+    if (unavailable) {
+      return null;
+    }
+    
     const { open, placement } = this.state;
 
     const valueOption = this.options.find(item => item.value === value);
