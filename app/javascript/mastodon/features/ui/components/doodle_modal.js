@@ -104,13 +104,13 @@ for (let row = 0; row < 7; row++) {
 // https://stackoverflow.com/questions/35940290/how-to-convert-base64-string-to-javascript-file-object-like-as-from-file-input-f
 function dataURLtoFile(dataurl, filename) {
   let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
   while(n--){
     u8arr[n] = bstr.charCodeAt(n);
   }
   return new File([u8arr], filename, { type: mime });
 }
-
+/** Doodle canvas size options */
 const DOODLE_SIZES = {
   normal: [500, 500, 'Square 500'],
   tootbanner: [702, 330, 'Tootbanner'],
@@ -520,7 +520,7 @@ export default class DoodleModal extends ImmutablePureComponent {
     let newSize = e.target.value;
     if (newSize === this.oldSize) return;
 
-    if (this.undos.length > 1 && !confirm('Change size? This will erase your drawing!')) {
+    if (this.undos.length > 1 && !confirm('Change canvas size? This will erase your current drawing!')) {
       return;
     }
 
@@ -528,7 +528,7 @@ export default class DoodleModal extends ImmutablePureComponent {
   };
 
   handleClearBtn = () => {
-    if (this.undos.length > 1 && !confirm('Clear screen? This will erase your drawing!')) {
+    if (this.undos.length > 1 && !confirm('Clear canvas? This will erase your current drawing!')) {
       return;
     }
 
@@ -542,72 +542,72 @@ export default class DoodleModal extends ImmutablePureComponent {
     this.updateSketcherSettings();
 
     return (
-      <div className='modal-root__modal doodle-modal'>
-        <div className='doodle-modal__container'>
-          <canvas ref={this.setCanvasRef} />
-        </div>
-
-        <div className='doodle-modal__action-bar'>
-          <div className='doodle-toolbar'>
-            <Button text='Done' onClick={this.onDoneButton} />
-            <Button text='Cancel' onClick={this.onCancelButton} />
+        <div className='modal-root__modal doodle-modal'>
+          <div className='doodle-modal__container'>
+            <canvas ref={this.setCanvasRef} />
           </div>
-          <div className='filler' />
-          <div className='doodle-toolbar with-inputs'>
-            <div>
-              <label htmlFor='dd_smoothing'>Smoothing</label>
+
+          <div className='doodle-modal__action-bar'>
+            <div className='doodle-toolbar'>
+              <Button text='Done' onClick={this.onDoneButton} />
+              <Button text='Cancel' onClick={this.onCancelButton} />
+            </div>
+            <div className='filler' />
+            <div className='doodle-toolbar with-inputs'>
+              <div>
+                <label htmlFor='dd_smoothing'>Smoothing</label>
               <span className='val'>
                 <input type='checkbox' id='dd_smoothing' onChange={this.tglSmooth} checked={this.smoothing} />
               </span>
-            </div>
-            <div>
-              <label htmlFor='dd_adaptive'>Adaptive</label>
+              </div>
+              <div>
+                <label htmlFor='dd_adaptive'>Adaptive</label>
               <span className='val'>
                 <input type='checkbox' id='dd_adaptive' onChange={this.tglAdaptive} checked={this.adaptiveStroke} />
               </span>
-            </div>
-            <div>
-              <label htmlFor='dd_weight'>Weight</label>
+              </div>
+              <div>
+                <label htmlFor='dd_weight'>Weight</label>
               <span className='val'>
                 <input type='number' min={1} id='dd_weight' value={this.weight} onChange={this.setWeight} />
               </span>
+              </div>
+              <div>
+                <select aria-label='Canvas size' onInput={this.changeSize} defaultValue={this.size}>
+                  { Object.values(mapValues(DOODLE_SIZES, (val, k) =>
+                      <option key={k} value={k}>{val[2]}</option>
+                  )) }
+                </select>
+              </div>
             </div>
-            <div>
-              <select aria-label='Canvas size' onInput={this.changeSize} defaultValue={this.size}>
-                { Object.values(mapValues(DOODLE_SIZES, (val, k) =>
-                  <option key={k} value={k}>{val[2]}</option>
-                )) }
-              </select>
+            <div className='doodle-toolbar'>
+              <IconButton icon='pencil' title='Draw' label='Draw' onClick={this.setModeDraw} size={18} active={this.mode === 'draw'} inverted />
+              <IconButton icon='bath' title='Fill' label='Fill' onClick={this.setModeFill} size={18} active={this.mode === 'fill'} inverted />
+              <IconButton icon='undo' title='Undo' label='Undo' onClick={this.undo} size={18} inverted />
+              <IconButton icon='trash' title='Clear' label='Clear' onClick={this.handleClearBtn} size={18} inverted />
             </div>
-          </div>
-          <div className='doodle-toolbar'>
-            <IconButton icon='pencil' title='Draw' label='Draw' onClick={this.setModeDraw} size={18} active={this.mode === 'draw'} inverted />
-            <IconButton icon='bath' title='Fill' label='Fill' onClick={this.setModeFill} size={18} active={this.mode === 'fill'} inverted />
-            <IconButton icon='undo' title='Undo' label='Undo' onClick={this.undo} size={18} inverted />
-            <IconButton icon='trash' title='Clear' label='Clear' onClick={this.handleClearBtn} size={18} inverted />
-          </div>
-          <div className='doodle-palette'>
-            {
-              palReordered.map((c, i) =>
-                c === null ?
-                  <br key={i} /> :
-                  <button
-                    key={i}
-                    style={{ backgroundColor: c[0] }}
-                    onClick={this.onPaletteClick}
-                    onContextMenu={this.onPaletteRClick}
-                    data-color={c[0]}
-                    title={c[1]}
-                    className={classNames({
+            <div className='doodle-palette'>
+              {
+                palReordered.map((c, i) =>
+                    c === null ?
+                        <br key={i} /> :
+                        <button
+                            key={i}
+                            style={{ backgroundColor: c[0] }}
+                            onClick={this.onPaletteClick}
+                            onContextMenu={this.onPaletteRClick}
+                            data-color={c[0]}
+                            title={c[1]}
+                            className={classNames({
                       'foreground': this.fg === c[0],
                       'background': this.bg === c[0],
                     })}
-                  />
-              )
-            }
+                        />
+                )
+              }
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 

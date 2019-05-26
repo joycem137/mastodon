@@ -3,6 +3,8 @@ const initialState = element && JSON.parse(element.textContent);
 
 const getMeta = (prop) => initialState && initialState.meta && initialState.meta[prop];
 
+export const enableFederationDropdown = getMeta('enable_federation_dropdown');
+export const enableDoodle = getMeta('enable_doodle');
 export const reduceMotion = getMeta('reduce_motion');
 export const autoPlayGif = getMeta('auto_play_gif');
 export const displayMedia = getMeta('display_media');
